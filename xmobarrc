@@ -1,0 +1,40 @@
+Config { font = "xft:Ubuntu Mono:pixelsize=16:antialias=true:hinting=true"
+       , additionalFonts = []
+       , borderColor = "282a36"
+       , border = TopB
+       , bgColor = "#282a36"
+       , fgColor = "#f8f8f2"
+       , alpha = 255
+       , position = Top
+       , textOffset = -1
+       , iconOffset = -1
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [ Run MultiCpu ["-L","15","-H","50", "--normal","green","--high","red"] 10
+                    , Run Memory ["-t","Mem: <usedratio>%"] 10
+                    , Run Swap [] 10
+                    , Run Com "uname" ["-s","-r"] "" 36000
+                    , Run Date "<fc=#ffb86c>%H:%M:%S</fc>" "date" 10
+					, Run Volume "default" "Master" [] 10
+					, Run Battery  [ "--template" , "Battery: <acstatus>"
+						, "-L"  , "30"        -- units: %
+						, "-H"  , "90"        -- units: %
+						, "-l"  , "#ff5555"
+						, "-n"  , "#ffb86c"
+						, "-h"  , "#50fa7b"
+						, "--"
+						, "-o"	, "<left>% (<timeleft>)"
+						, "-O"	, "<fc=#f1fa8c>Charging</fc>"
+						, "-i"	, "<fc=#50fa7b>Charged</fc>"
+						] 50
+       				]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%multicpu% | %memory% * %swap% }\
+                    \{ %battery% | %volume% | %date% "
+       }
